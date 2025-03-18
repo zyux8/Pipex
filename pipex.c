@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:35:44 by ohaker            #+#    #+#             */
-/*   Updated: 2025/03/12 22:45:23 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/03/17 21:49:19 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,21 @@ void	execute(char *cmd, char **envp)
 	char	**args;
 	char	*path;
 
+	if (!cmd || cmd[0] == '\0')
+		cmd = "true";
 	args = ft_split(cmd, ' ');
 	path = find_path(args[0], envp);
 	if (execve(path, args, envp) == -1)
 	{
-		error("Error, command path not found");
 		clear_tab(args);
+		// free(path);
+		error("Error, command path not found");
 	}
 }
 
 void	call_child(char **argv, char **envp, int *fd)
 {
-	int		input_file;
+	int	input_file;
 
 	input_file = open_file(argv[1], O_RDONLY, 0777);
 	dup2(input_file, STDIN_FILENO);
@@ -66,6 +69,9 @@ int	main(int argc, char **argv, char **envp)
 		call_parent(argv, envp, fd);
 	}
 	else
+	{
 		write(STDOUT_FILENO, "Error, wrong number of arguments!\n", 34);
+		exit(1);
+	}
 	return (0);
 }

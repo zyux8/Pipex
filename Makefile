@@ -6,11 +6,11 @@
 #    By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 16:48:23 by ohaker            #+#    #+#              #
-#    Updated: 2025/03/14 18:12:05 by ohaker           ###   ########.fr        #
+#    Updated: 2025/03/17 19:46:09 by ohaker           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex.a
+NAME = pipex
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = \
@@ -22,19 +22,19 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make re -C ./libft
-	gcc $(CFLAGS) $(OBJ) -Llibft -lft -o $(NAME) 
+	@make re -C libft
+	@gcc $(CFLAGS) $(OBJ) -Llibft -lft -o $(NAME) 
 
 %.o: %.c
-	gcc $(CFLAGS) -c $< -o $@
+	@gcc $(CFLAGS) -c $< -o $@
 
 clean:
-	make clean -C ./libft
-	rm -rf $(OBJ)
+	@make clean -C libft
+	@rm -rf $(OBJ)
 
 fclean: clean
-	make fclean -C ./libft
-	rm -rf $(NAME)
+	@make fclean -C libft
+	@rm -rf $(NAME)
 
 re: fclean all
 

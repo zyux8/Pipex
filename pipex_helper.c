@@ -6,7 +6,7 @@
 /*   By: ohaker <ohaker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 18:51:37 by ohaker            #+#    #+#             */
-/*   Updated: 2025/03/12 22:45:19 by ohaker           ###   ########.fr       */
+/*   Updated: 2025/03/17 20:10:33 by ohaker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error(char *error_msg)
 {
 	perror(error_msg);
-	exit(EXIT_FAILURE);
+	exit(1);
 }
 
 int	open_file(char *fd, int flags, int mode)
